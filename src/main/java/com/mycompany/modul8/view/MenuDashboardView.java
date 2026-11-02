@@ -16,6 +16,7 @@ public class MenuDashboardView extends JFrame {
 
     private DashboardHeader header;
     private MenuTable tabel;
+    private FormAddMenu form;
 
     public MenuDashboardView() {
         SwingUtilities.invokeLater(() -> {
@@ -26,9 +27,13 @@ public class MenuDashboardView extends JFrame {
 
             header = new DashboardHeader();
             tabel = new MenuTable();
+            form = new FormAddMenu(this);
 
             add(tabel, BorderLayout.CENTER);
             add(header, BorderLayout.NORTH);
+
+            header.getMenuBtn().addActionListener(e -> form.setVisible(true));
+
             setVisible(true);
         });
     }
