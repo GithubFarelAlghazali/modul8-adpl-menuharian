@@ -8,7 +8,7 @@ package com.mycompany.modul8;
  *
  * @author User
  */
-public class Modul8 {
+public class Main {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
