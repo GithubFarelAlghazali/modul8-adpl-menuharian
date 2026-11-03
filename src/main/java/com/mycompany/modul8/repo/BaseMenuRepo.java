@@ -4,10 +4,17 @@
  */
 package com.mycompany.modul8.repo;
 
+import com.mycompany.modul8.config.Database;
+
 /**
  *
  * @author User
  */
-public class MenuRepo {
+public class BaseMenuRepo {
 
+    protected final Database db;
+
+    public BaseMenuRepo(Database db) {
+        this.db = db;
+    }
 }
