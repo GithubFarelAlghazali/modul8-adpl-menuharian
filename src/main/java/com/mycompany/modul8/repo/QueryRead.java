@@ -8,7 +8,7 @@ package com.mycompany.modul8.repo;
  *
  * @author User
  */
-public interface QueryRead {
+public interface QueryRead<P, R> {
 
-    public void query();
+    public R query(P param);
 }
