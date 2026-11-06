@@ -17,10 +17,23 @@ public class MenuTable extends JPanel {
     private JTable tabelMenu;
     private JScrollPane kotakTabel;
     private DefaultTableModel modelTabel;
+    private String[] columNames = {"No", "Menu", "Tujuan", "Aksi"};
 
     public MenuTable() {
         setLayout(new BorderLayout());
-        modelTabel = new DefaultTableModel(new String[]{"No", "Menu", "Tujuan"}, 0);
+        modelTabel = new DefaultTableModel(null, columNames) {
+            @Override
+            public boolean isCellEditable(int row, int col) {
+                return col == 4;
+            }
+
+            public Class<?> GetColumnClass(int columnIndex) {
+                if (columnIndex == 4) {
+                    return Object.class;
+                }
+                return String.class;
+            }
+        };
         tabelMenu = new JTable(modelTabel);
         kotakTabel = new JScrollPane(tabelMenu);
         add(kotakTabel, BorderLayout.CENTER);
