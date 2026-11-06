@@ -36,5 +36,14 @@ public class MenuDashboardView extends JFrame {
 
             setVisible(true);
         });
+
+    }
+
+    public DashboardHeader getHeader() {
+        return this.header;
+    }
+
+    public MenuTable getMenuTable() {
+        return this.tabel;
     }
 }

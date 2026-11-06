@@ -25,4 +25,8 @@ public class MenuTable extends JPanel {
         kotakTabel = new JScrollPane(tabelMenu);
         add(kotakTabel, BorderLayout.CENTER);
     }
+
+    public DefaultTableModel getModelTabel() {
+        return modelTabel;
+    }
 }
