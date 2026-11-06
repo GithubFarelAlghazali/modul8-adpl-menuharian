@@ -20,7 +20,7 @@ public class AddMenu extends BaseMenuRepo implements QueryWrite<MenuModel> {
 
     @Override
     public void query(MenuModel menu) {
-        String sql = "INSERT INTO tabel_menu (nama, tujuan) VALUES (?,?)";
+        String sql = "INSERT INTO tabel_menu (menu, tujuan) VALUES (?,?)";
 
         try (Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, menu.getMenu());
