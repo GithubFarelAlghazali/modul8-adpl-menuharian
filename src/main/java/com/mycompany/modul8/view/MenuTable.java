@@ -37,7 +37,6 @@ public class MenuTable extends JPanel {
         tabelMenu.getColumnModel().getColumn(0).setMaxWidth(50);
         tabelMenu.getColumnModel().getColumn(editCol).setPreferredWidth(160);
         tabelMenu.getColumnModel().getColumn(editCol).setCellRenderer(new ActionCellRenderer());
-
         kotakTabel = new JScrollPane(tabelMenu);
         add(kotakTabel, BorderLayout.CENTER);
     }
