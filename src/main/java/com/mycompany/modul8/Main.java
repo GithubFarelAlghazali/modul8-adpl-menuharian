@@ -24,9 +24,10 @@ public class Main {
 
             QueryWrite<MenuModel> addMenu = new AddMenu(db);
             QueryRead<Void, List<MenuModel>> getAllMenu = new GetAllMenu(db);
-            QueryWrite<MenuModel> deleteMenu = new DeleteMenu(db);
+            QueryWrite<Integer> deleteMenu = new DeleteMenu(db);
+            QueryRead<Integer, MenuModel> getAMenu = new GetAMenu(db);
 
-            MenuManager manager = new MenuManager(addMenu, getAllMenu, deleteMenu);
+            MenuManager manager = new MenuManager(addMenu, getAllMenu, deleteMenu, getAMenu);
             MenuDashboardView view = new MenuDashboardView();
             new DashboardController(view, manager);
 

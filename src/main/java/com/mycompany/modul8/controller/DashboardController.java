@@ -7,8 +7,10 @@ package com.mycompany.modul8.controller;
 import com.mycompany.modul8.view.MenuDashboardView;
 import com.mycompany.modul8.model.MenuManager;
 import com.mycompany.modul8.model.MenuModel;
-import com.mycompany.modul8.view.FormAddMenu;
+import com.mycompany.modul8.view.form.FormAddMenu;
 import com.mycompany.modul8.view.actioncell.RowActionListener;
+import com.mycompany.modul8.view.form.FormBase;
+import com.mycompany.modul8.view.form.FormEditMenu;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -43,22 +45,27 @@ public class DashboardController {
 
         });
 
-        this.view.getHeader().getMenuBtn().addActionListener(e -> bukaFormMenu());
+        this.view.getHeader().getMenuBtn().addActionListener(e -> formTambah());
         muatTabel();
     }
 
-    private void bukaFormMenu() {
+    private void formTambah() {
         FormAddMenu form = new FormAddMenu(view);
-
-        form.getBtnSave().addActionListener(e -> simpanMenu(form));
-        form.getBtnCancel().addActionListener(e -> form.dispose());
-
-        form.setVisible(true);
+        tampilkanForm(form, () -> {
+            manager.tambahMenu(form.getInMenu().getText(), form.getInTujuan().getText());
+        });
     }
 
-    private void simpanMenu(FormAddMenu form) {
+    private void tampilkanForm(FormBase form, Runnable aksiSimpan) {
+        form.getBtnSave().addActionListener(e -> simpanMenu(form, aksiSimpan));
+        form.getBtnCancel().addActionListener(e -> form.dispose());
+        form.setVisible(true);
+
+    }
+
+    private void simpanMenu(FormBase form, Runnable aksiSimpan) {
         try {
-            manager.tambahMenu(form.getInMenu().getText(), form.getInTujuan().getText());
+            aksiSimpan.run();
             form.dispose();
             muatTabel();
         } catch (IllegalArgumentException ex) {
@@ -68,8 +75,11 @@ public class DashboardController {
         }
     }
 
-    private void editMenu(MenuModel row) {
-        JOptionPane.showMessageDialog(view, "Edit : " + row.getMenu());
+    private void editMenu(MenuModel selected) {
+        FormEditMenu form = new FormEditMenu(view, selected);
+
+        form.getBtnCancel().addActionListener(e -> form.dispose());
+        form.setVisible(true);
     }
 
     private void deleteMenu(MenuModel row) {
@@ -78,7 +88,7 @@ public class DashboardController {
 
         if (confirm == JOptionPane.YES_OPTION) {
             try {
-                manager.hapusMenu(row);
+                manager.hapusMenu(row.getId());
                 muatTabel();
                 JOptionPane.showMessageDialog(view, "Menu berhasil dihapus", "Sukses", JOptionPane.INFORMATION_MESSAGE);
             } catch (RuntimeException e) {

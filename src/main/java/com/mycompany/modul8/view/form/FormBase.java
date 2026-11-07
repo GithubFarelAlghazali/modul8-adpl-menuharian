@@ -1,25 +1,26 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package com.mycompany.modul8.view;
+package com.mycompany.modul8.view.form;
 
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
  *
  * @author User
  */
-public class FormAddMenu extends JDialog {
+public class FormBase extends JDialog {
 
     private JButton btnSave;
     private JButton btnCancel;
     private JTextField inMenu;
     private JTextField inTujuan;
 
-    public FormAddMenu(Frame owner) {
-        super(owner, "Form Tambah Menu", true);
+    public FormBase(Frame owner, String title, String saveText) {
+        super(owner, title, true);
         setLayout(new BorderLayout());
         setSize(400, 150);
 
@@ -37,7 +38,7 @@ public class FormAddMenu extends JDialog {
 
         // button
         JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        btnSave = new JButton("Simpan Menu");
+        btnSave = new JButton(saveText);
         btnCancel = new JButton("Batal");
         btnPanel.add(this.btnSave);
         btnPanel.add(this.btnCancel);
