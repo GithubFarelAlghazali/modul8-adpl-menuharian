@@ -4,8 +4,8 @@
  */
 package com.mycompany.modul8.repo;
 
+import com.mycompany.modul8.config.ConnectionProvider;
 import com.mycompany.modul8.model.MenuModel;
-import com.mycompany.modul8.config.Database;
 import java.sql.*;
 
 /**
@@ -14,7 +14,7 @@ import java.sql.*;
  */
 public class AddMenu extends BaseMenuRepo implements QueryWrite<MenuModel> {
 
-    public AddMenu(Database db) {
+    public AddMenu(ConnectionProvider db) {
         super(db);
     }
 

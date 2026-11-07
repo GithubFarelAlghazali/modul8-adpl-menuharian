@@ -4,8 +4,8 @@
  */
 package com.mycompany.modul8.repo;
 
+import com.mycompany.modul8.config.ConnectionProvider;
 import com.mycompany.modul8.model.MenuModel;
-import com.mycompany.modul8.config.Database;
 import java.sql.*;
 import java.util.*;
 
@@ -15,7 +15,7 @@ import java.util.*;
  */
 public class GetAllMenu extends BaseMenuRepo implements QueryRead<Void, List<MenuModel>> {
 
-    public GetAllMenu(Database db) {
+    public GetAllMenu(ConnectionProvider db) {
         super(db);
     }
 
@@ -27,7 +27,7 @@ public class GetAllMenu extends BaseMenuRepo implements QueryRead<Void, List<Men
         try (Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 daftarMenu.add(new MenuModel(
-                        rs.getString("id"),
+                        rs.getInt("id"),
                         rs.getString("menu"),
                         rs.getString("tujuan")
                 ));

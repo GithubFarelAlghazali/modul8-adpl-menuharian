@@ -10,7 +10,7 @@ package com.mycompany.modul8.model;
  */
 public class MenuModel {
 
-    private String id;
+    private int id;
     private String menu;
     private String tujuan;
 
@@ -19,7 +19,7 @@ public class MenuModel {
         this.tujuan = tujuan;
     }
 
-    public MenuModel(String id, String menu, String tujuan) {
+    public MenuModel(int id, String menu, String tujuan) {
         this.id = id;
         this.menu = menu;
         this.tujuan = tujuan;
@@ -31,6 +31,10 @@ public class MenuModel {
 
     public String getTujuan() {
         return this.tujuan;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     public void setMenu(String newMenu) {

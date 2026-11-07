@@ -7,10 +7,7 @@ import com.mycompany.modul8.config.Database;
 import com.mycompany.modul8.controller.DashboardController;
 import com.mycompany.modul8.model.MenuManager;
 import com.mycompany.modul8.model.MenuModel;
-import com.mycompany.modul8.repo.AddMenu;
-import com.mycompany.modul8.repo.GetAllMenu;
-import com.mycompany.modul8.repo.QueryRead;
-import com.mycompany.modul8.repo.QueryWrite;
+import com.mycompany.modul8.repo.*;
 import com.mycompany.modul8.view.MenuDashboardView;
 import java.util.List;
 import javax.swing.*;
@@ -27,8 +24,9 @@ public class Main {
 
             QueryWrite<MenuModel> addMenu = new AddMenu(db);
             QueryRead<Void, List<MenuModel>> getAllMenu = new GetAllMenu(db);
+            QueryWrite<Integer> deleteMenu = new DeleteMenu(db);
 
-            MenuManager manager = new MenuManager(addMenu, getAllMenu);
+            MenuManager manager = new MenuManager(addMenu, getAllMenu, deleteMenu);
             MenuDashboardView view = new MenuDashboardView();
             new DashboardController(view, manager);
 

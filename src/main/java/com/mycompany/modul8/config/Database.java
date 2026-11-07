@@ -10,7 +10,7 @@ import java.sql.*;
  *
  * @author User
  */
-public class Database {
+public class Database implements ConnectionProvider {
 
     private static final String URL = "jdbc:mysql://localhost:3306/adpldb";
     private static final String USER = "root";

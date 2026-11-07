@@ -73,7 +73,14 @@ public class DashboardController {
     }
 
     private void deleteMenu(MenuModel row) {
-        JOptionPane.showMessageDialog(view, "Delete : " + row.getMenu());
+        int confirm = JOptionPane.showConfirmDialog(view, "Yakin ingin menghapus " + row.getMenu() + " dengan tujuan " + row.getTujuan() + " ?",
+                "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            manager.hapusMenu(row.getId());
+            muatTabel();
+            JOptionPane.showMessageDialog(view, "Menu berhasil dihapus", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     private void muatTabel() {

@@ -4,7 +4,7 @@
  */
 package com.mycompany.modul8.repo;
 
-import com.mycompany.modul8.config.Database;
+import com.mycompany.modul8.config.ConnectionProvider;
 
 /**
  *
@@ -12,9 +12,9 @@ import com.mycompany.modul8.config.Database;
  */
 public class BaseMenuRepo {
 
-    protected final Database db;
+    protected final ConnectionProvider db;
 
-    public BaseMenuRepo(Database db) {
+    public BaseMenuRepo(ConnectionProvider db) {
         this.db = db;
     }
 }

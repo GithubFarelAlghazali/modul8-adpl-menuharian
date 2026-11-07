@@ -15,11 +15,14 @@ public class MenuManager {
 
     private final QueryWrite<MenuModel> addMenu;
     private final QueryRead<Void, List<MenuModel>> getAllMenu;
+    private final QueryWrite<Integer> deleteMenu;
 
     public MenuManager(QueryWrite<MenuModel> addMenu,
-            QueryRead<Void, List<MenuModel>> getAllMenu) {
+            QueryRead<Void, List<MenuModel>> getAllMenu,
+            QueryWrite<Integer> deleteMenu) {
         this.addMenu = addMenu;
         this.getAllMenu = getAllMenu;
+        this.deleteMenu = deleteMenu;
     }
 
     public void tambahMenu(String menu, String tujuan) {
@@ -30,6 +33,10 @@ public class MenuManager {
             throw new IllegalArgumentException("Nama tujuan tidak boleh kosong!");
         }
         addMenu.query(new MenuModel(menu.trim(), tujuan.trim()));
+    }
+
+    public void hapusMenu(int id) {
+        deleteMenu.query(id);
     }
 
     public List<MenuModel> ambilMenu() {
