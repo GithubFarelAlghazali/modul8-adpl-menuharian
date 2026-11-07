@@ -5,6 +5,7 @@
 package com.mycompany.modul8.repo;
 
 import com.mycompany.modul8.config.ConnectionProvider;
+import com.mycompany.modul8.model.MenuModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -13,23 +14,22 @@ import java.sql.SQLException;
  *
  * @author User
  */
-public class DeleteMenu extends BaseMenuRepo implements QueryWrite<Integer> {
+public class DeleteMenu extends BaseMenuRepo implements QueryWrite<MenuModel> {
 
     public DeleteMenu(ConnectionProvider db) {
         super(db);
     }
 
     @Override
-    public void query(Integer id) {
+    public void query(MenuModel menu) {
         String sql = "DELETE FROM tabel_menu WHERE ID = ?";
         try (Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, id);
+            ps.setInt(1, menu.getId());
             int rowsAffected = ps.executeUpdate();
 
             if (rowsAffected == 0) {
-                throw new RuntimeException("Data menu dengan id : " + id + " tidak ditemukan");
+                throw new RuntimeException("Data menu dengan id : " + menu.getId() + " tidak ditemukan");
             }
-            ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Gagal menghapus data menu : " + e.getMessage());
         }

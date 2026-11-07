@@ -77,9 +77,13 @@ public class DashboardController {
                 "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
         if (confirm == JOptionPane.YES_OPTION) {
-            manager.hapusMenu(row.getId());
-            muatTabel();
-            JOptionPane.showMessageDialog(view, "Menu berhasil dihapus", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+            try {
+                manager.hapusMenu(row);
+                muatTabel();
+                JOptionPane.showMessageDialog(view, "Menu berhasil dihapus", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(view, e.getMessage(), "Terjadi kesalahan saat menghapus menu", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 

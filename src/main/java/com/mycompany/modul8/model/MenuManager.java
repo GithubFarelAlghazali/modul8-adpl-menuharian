@@ -15,11 +15,11 @@ public class MenuManager {
 
     private final QueryWrite<MenuModel> addMenu;
     private final QueryRead<Void, List<MenuModel>> getAllMenu;
-    private final QueryWrite<Integer> deleteMenu;
+    private final QueryWrite<MenuModel> deleteMenu;
 
     public MenuManager(QueryWrite<MenuModel> addMenu,
             QueryRead<Void, List<MenuModel>> getAllMenu,
-            QueryWrite<Integer> deleteMenu) {
+            QueryWrite<MenuModel> deleteMenu) {
         this.addMenu = addMenu;
         this.getAllMenu = getAllMenu;
         this.deleteMenu = deleteMenu;
@@ -35,8 +35,8 @@ public class MenuManager {
         addMenu.query(new MenuModel(menu.trim(), tujuan.trim()));
     }
 
-    public void hapusMenu(int id) {
-        deleteMenu.query(id);
+    public void hapusMenu(MenuModel menu) {
+        deleteMenu.query(menu);
     }
 
     public List<MenuModel> ambilMenu() {

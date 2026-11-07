@@ -4,8 +4,6 @@
  */
 package com.mycompany.modul8.repo;
 
-import com.mycompany.modul8.model.MenuModel;
-
 /**
  *
  * @author User
