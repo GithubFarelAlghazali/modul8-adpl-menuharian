@@ -45,34 +45,15 @@ public class DashboardController {
 
         });
 
-        this.view.getHeader().getMenuBtn().addActionListener(e -> formTambah());
+        this.view.getHeader().getMenuBtn().addActionListener(e -> tambahMenu());
         muatTabel();
     }
 
-    private void formTambah() {
+    private void tambahMenu() {
         FormAddMenu form = new FormAddMenu(view);
         tampilkanForm(form, () -> {
             manager.tambahMenu(form.getInMenu().getText(), form.getInTujuan().getText());
-        });
-    }
-
-    private void tampilkanForm(FormBase form, Runnable aksiSimpan) {
-        form.getBtnSave().addActionListener(e -> simpanMenu(form, aksiSimpan));
-        form.getBtnCancel().addActionListener(e -> form.dispose());
-        form.setVisible(true);
-
-    }
-
-    private void simpanMenu(FormBase form, Runnable aksiSimpan) {
-        try {
-            aksiSimpan.run();
-            form.dispose();
-            muatTabel();
-        } catch (IllegalArgumentException ex) {
-            JOptionPane.showMessageDialog(form, ex.getMessage(), "Input tidak valid!", JOptionPane.WARNING_MESSAGE);
-        } catch (RuntimeException ex) {
-            JOptionPane.showMessageDialog(form, ex.getMessage(), "Terjadi kesalahan", JOptionPane.ERROR_MESSAGE);
-        }
+        }, "Menu berhasil ditambahkan!");
     }
 
     private void editMenu(MenuModel selected) {
@@ -80,8 +61,28 @@ public class DashboardController {
 
         tampilkanForm(form, () -> {
             manager.ubahMenu(selected.getId(), form.getInMenu().getText(), form.getInTujuan().getText());
-        });
+        }, "Menu berhasil diedit!");
+    }
 
+    private void tampilkanForm(FormBase form, Runnable aksiSimpan, String pesanSukses) {
+        form.getBtnSave().addActionListener(e -> simpanMenu(form, aksiSimpan, pesanSukses));
+        form.getBtnCancel().addActionListener(e -> form.dispose());
+        form.setVisible(true);
+
+    }
+
+    private void simpanMenu(FormBase form, Runnable aksiSimpan, String pesanSukses) {
+        try {
+            aksiSimpan.run();
+            form.dispose();
+            muatTabel();
+            JOptionPane.showMessageDialog(view, pesanSukses, "Sukses", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(form, ex.getMessage(), "Input tidak valid!", JOptionPane.WARNING_MESSAGE);
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(form, ex.getMessage(), "Terjadi kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void deleteMenu(MenuModel row) {

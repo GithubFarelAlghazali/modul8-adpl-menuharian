@@ -24,15 +24,17 @@ public class EditMenu extends BaseMenuRepo implements QueryWrite<MenuModel> {
     public void query(MenuModel menu) {
         String sql = "UPDATE tabel_menu SET menu = ? , tujuan = ? WHERE id = ?";
         try (Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, menu.getMenu());
+            ps.setString(2, menu.getTujuan());
+            ps.setInt(3, menu.getId());
+            ps.executeUpdate();
+
             int rowsAffected = ps.executeUpdate();
 
             if (rowsAffected == 0) {
                 throw new RuntimeException("Data menu dengan id : " + menu.getId() + " tidak ditemukan");
             }
-            ps.setString(1, menu.getMenu());
-            ps.setString(2, menu.getTujuan());
-            ps.setInt(3, menu.getId());
-            ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Gagal mengedit data menu : " + e.getMessage());
         }
