@@ -17,14 +17,19 @@ public class MenuManager {
     private final QueryRead<Void, List<MenuModel>> getAllMenu;
     private final QueryWrite<Integer> deleteMenu;
     private final QueryRead<Integer, MenuModel> getAMenu;
+    private final QueryWrite<MenuModel> editMenu;
 
     public MenuManager(QueryWrite<MenuModel> addMenu,
             QueryRead<Void, List<MenuModel>> getAllMenu,
-            QueryWrite<Integer> deleteMenu, QueryRead<Integer, MenuModel> getAMenu) {
+            QueryWrite<Integer> deleteMenu,
+            QueryRead<Integer, MenuModel> getAMenu,
+            QueryWrite<MenuModel> editMenu
+    ) {
         this.addMenu = addMenu;
         this.getAllMenu = getAllMenu;
         this.deleteMenu = deleteMenu;
         this.getAMenu = getAMenu;
+        this.editMenu = editMenu;
     }
 
     public void tambahMenu(String menu, String tujuan) {
@@ -39,6 +44,11 @@ public class MenuManager {
 
     public void hapusMenu(int id) {
         deleteMenu.query(id);
+    }
+
+    public void ubahMenu(int id, String menu, String tujuan) {
+        MenuModel selectedMenu = new MenuModel(id, menu, tujuan);
+        editMenu.query(selectedMenu);
     }
 
     public MenuModel ambilSatuMenu(int id) {

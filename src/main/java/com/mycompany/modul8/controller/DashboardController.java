@@ -78,8 +78,10 @@ public class DashboardController {
     private void editMenu(MenuModel selected) {
         FormEditMenu form = new FormEditMenu(view, selected);
 
-        form.getBtnCancel().addActionListener(e -> form.dispose());
-        form.setVisible(true);
+        tampilkanForm(form, () -> {
+            manager.ubahMenu(selected.getId(), form.getInMenu().getText(), form.getInTujuan().getText());
+        });
+
     }
 
     private void deleteMenu(MenuModel row) {
